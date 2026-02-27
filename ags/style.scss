@@ -1,0 +1,260 @@
+// AquaOS — Main SCSS
+// Variables, notification center, control center, launcher, system monitor
+
+// ── Variables ────────────────────────────────────────────────────────────────
+
+$bg:          rgba(18, 18, 22, 0.88);
+$bg-secondary:rgba(26, 26, 30, 0.90);
+$fg:          #e0e0e0;
+$fg-dim:      rgba(224, 224, 224, 0.65);
+$accent:      #0a84ff;
+$accent-dim:  rgba(10, 132, 255, 0.25);
+$green:       #30d158;
+$red:         #ff453a;
+$yellow:      #ffd60a;
+$border:      rgba(255, 255, 255, 0.12);
+$radius:      14px;
+$radius-sm:   8px;
+
+// ── Notification Center ───────────────────────────────────────────────────────
+
+.notification-center {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 12px;
+    min-width: 360px;
+
+    .header {
+        font-family: Inter;
+        font-size: 14px;
+        font-weight: bold;
+        color: $fg;
+        padding-bottom: 8px;
+        border-bottom: 1px solid $border;
+        margin-bottom: 8px;
+    }
+
+    .clear-btn {
+        font-family: Inter;
+        font-size: 12px;
+        color: $accent;
+        background: transparent;
+        border: none;
+        padding: 4px 8px;
+        border-radius: $radius-sm;
+
+        &:hover { background: $accent-dim; }
+    }
+
+    .notification-list {
+        min-height: 60px;
+    }
+}
+
+.notification-item {
+    background: $bg-secondary;
+    border-radius: $radius-sm;
+    border: 1px solid $border;
+    padding: 10px 12px;
+    margin-bottom: 6px;
+
+    .app-icon {
+        min-width: 32px;
+        min-height: 32px;
+    }
+
+    .summary {
+        font-family: Inter;
+        font-size: 13px;
+        font-weight: bold;
+        color: $fg;
+    }
+
+    .body {
+        font-family: Inter;
+        font-size: 12px;
+        color: $fg-dim;
+        margin-top: 2px;
+    }
+
+    .time-label {
+        font-family: Inter;
+        font-size: 10px;
+        color: rgba(224, 224, 224, 0.40);
+    }
+
+    .dismiss-btn {
+        background: transparent;
+        border: none;
+        color: $fg-dim;
+        padding: 2px 6px;
+        border-radius: 6px;
+        &:hover { background: rgba(255, 69, 58, 0.25); color: $red; }
+    }
+
+    &:hover { background: rgba(255, 255, 255, 0.06); }
+}
+
+// ── Control Center ────────────────────────────────────────────────────────────
+
+.control-center {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 16px;
+    min-width: 300px;
+
+    .section-label {
+        font-family: Inter;
+        font-size: 11px;
+        color: $fg-dim;
+        margin-bottom: 8px;
+        letter-spacing: 0.5px;
+    }
+}
+
+.toggle-button {
+    background: rgba(255, 255, 255, 0.07);
+    border: 1px solid $border;
+    border-radius: $radius-sm;
+    padding: 10px 14px;
+    color: $fg;
+    font-family: Inter;
+    font-size: 13px;
+    min-width: 120px;
+
+    &:hover   { background: rgba(255, 255, 255, 0.12); }
+    &.active  {
+        background: $accent-dim;
+        border-color: rgba(10, 132, 255, 0.45);
+        color: $accent;
+    }
+}
+
+.slider-container {
+    padding: 6px 0;
+
+    scale {
+        trough {
+            background: rgba(255, 255, 255, 0.12);
+            border-radius: 4px;
+            min-height: 4px;
+        }
+        highlight {
+            background: $accent;
+            border-radius: 4px;
+        }
+        slider {
+            background: white;
+            border-radius: 50%;
+            min-width: 14px;
+            min-height: 14px;
+            box-shadow: 0 1px 4px rgba(0,0,0,0.4);
+        }
+        &:hover trough { background: rgba(255,255,255,0.18); }
+    }
+}
+
+// ── Launcher ─────────────────────────────────────────────────────────────────
+
+.launcher {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 12px;
+    min-width: 520px;
+}
+
+.search-entry {
+    background: rgba(255, 255, 255, 0.07);
+    border-radius: $radius-sm;
+    border: 1.5px solid $border;
+    padding: 10px 14px 10px 36px;
+    font-family: Inter;
+    font-size: 16px;
+    color: $fg;
+    caret-color: $accent;
+
+    &:focus {
+        border-color: $accent;
+        background: rgba(10, 132, 255, 0.08);
+    }
+}
+
+.search-icon {
+    color: $fg-dim;
+    font-size: 16px;
+}
+
+separator {
+    background: $border;
+    min-height: 1px;
+    margin: 8px 0;
+}
+
+.results-list {
+    min-height: 40px;
+}
+
+.result-item {
+    padding: 8px 10px;
+    border-radius: $radius-sm;
+    font-family: Inter;
+    font-size: 13px;
+    color: $fg;
+
+    .result-name  { font-size: 13px; font-weight: bold; }
+    .result-desc  { font-size: 11px; color: $fg-dim; }
+
+    &.selected {
+        background: $accent-dim;
+        border: 1px solid rgba(10, 132, 255, 0.35);
+        color: $accent;
+
+        .result-name { color: $accent; }
+    }
+
+    &:hover:not(.selected) { background: rgba(255, 255, 255, 0.06); }
+}
+
+// ── System Monitor ────────────────────────────────────────────────────────────
+
+.system-monitor {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 16px;
+    min-width: 340px;
+}
+
+.widget-card {
+    background: $bg-secondary;
+    border-radius: $radius-sm;
+    border: 1px solid $border;
+    padding: 12px 14px;
+    min-width: 140px;
+
+    .metric-icon {
+        font-size: 20px;
+        margin-right: 10px;
+    }
+
+    .metric-value {
+        font-family: Inter;
+        font-size: 22px;
+        font-weight: bold;
+        color: $fg;
+    }
+
+    .metric-label {
+        font-family: Inter;
+        font-size: 11px;
+        color: $fg-dim;
+    }
+
+    &.cpu  .metric-icon { color: #4a9eff; }
+    &.ram  .metric-icon { color: $green; }
+    &.disk .metric-icon { color: $yellow; }
+    &.temp .metric-icon { color: $red; }
+}

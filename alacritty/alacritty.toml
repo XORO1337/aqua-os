@@ -1,0 +1,127 @@
+# AquaOS — Alacritty Configuration (TOML)
+
+[general]
+live_config_reload = true
+
+[window]
+opacity      = 0.82
+blur         = true
+decorations  = "None"
+padding      = { x = 14, y = 10 }
+dynamic_padding = true
+
+[font]
+normal   = { family = "JetBrains Mono Nerd Font", style = "Regular" }
+bold     = { family = "JetBrains Mono Nerd Font", style = "Bold" }
+italic   = { family = "JetBrains Mono Nerd Font", style = "Italic" }
+bold_italic = { family = "JetBrains Mono Nerd Font", style = "Bold Italic" }
+size     = 13.5
+
+[cursor]
+style     = { shape = "Block", blinking = "Always" }
+blink_interval = 500
+unfocused_hollow = true
+
+[mouse]
+hide_when_typing = true
+
+[selection]
+save_to_clipboard = true
+
+[bell]
+animation = "EaseOutExpo"
+duration  = 100
+color     = "#0a84ff"
+
+# ── Frosty Glass Palette ─────────────────────────────────────────────────────
+
+[colors.primary]
+background = "#1e1e20"
+foreground = "#e0e0e0"
+
+[colors.cursor]
+text   = "#1e1e20"
+cursor = "#0a84ff"
+
+[colors.selection]
+text       = "#ffffff"
+background = "#0a84ff"
+
+[colors.normal]
+black   = "#282830"
+red     = "#ff453a"
+green   = "#30d158"
+yellow  = "#ffd60a"
+blue    = "#0a84ff"
+magenta = "#bf5af2"
+cyan    = "#5ac8fa"
+white   = "#ebebf5"
+
+[colors.bright]
+black   = "#3a3a44"
+red     = "#ff6961"
+green   = "#4cde71"
+yellow  = "#ffe233"
+blue    = "#409cff"
+magenta = "#d483ff"
+cyan    = "#70d7ff"
+white   = "#f5f5ff"
+
+# ── Scrollback ───────────────────────────────────────────────────────────────
+
+[scrolling]
+history  = 50000
+multiplier = 3
+
+# ── macOS-style Keybinds ─────────────────────────────────────────────────────
+
+[[keyboard.bindings]]
+key = "C"
+mods = "Super"
+action = "Copy"
+
+[[keyboard.bindings]]
+key = "V"
+mods = "Super"
+action = "Paste"
+
+[[keyboard.bindings]]
+key = "N"
+mods = "Super"
+action = "CreateNewWindow"
+
+[[keyboard.bindings]]
+key = "Q"
+mods = "Super"
+action = "Quit"
+
+[[keyboard.bindings]]
+key = "Key0"
+mods = "Super"
+action = "ResetFontSize"
+
+[[keyboard.bindings]]
+key = "Plus"
+mods = "Super"
+action = "IncreaseFontSize"
+
+[[keyboard.bindings]]
+key = "Minus"
+mods = "Super"
+action = "DecreaseFontSize"
+
+[[keyboard.bindings]]
+key = "K"
+mods = "Super"
+action = "ClearHistory"
+
+# ── URL Hints ────────────────────────────────────────────────────────────────
+
+[[hints.enabled]]
+command   = "xdg-open"
+post_processing = true
+regex     = "(ipfs:|ipns:|magnet:|mailto:|gemini://|gopher://|https://|http://|news:|file:|git://|ssh:|ftp://)[^\\u0000-\\u001F\\u007F-\\u009F<>\"\\\\s{-}\\\\^⟨⟩`]+"
+
+[hints.enabled.binding]
+key   = "U"
+mods  = "Control|Shift"

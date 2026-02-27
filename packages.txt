@@ -1,0 +1,66 @@
+# AquaOS — Package Dependencies
+# Organized by category.
+# [AUR] = Arch Linux AUR package (use yay or paru)
+
+# ── Compositor ───────────────────────────────────────────────────────────────
+hyprland              # Wayland compositor
+hyprlock              # Lockscreen
+hypridle              # Idle daemon
+
+# ── Shell / Widgets ───────────────────────────────────────────────────────────
+quickshell-git        # [AUR] QML shell (Top Bar + Dock)
+aylurs-gtk-shell-git  # [AUR] AGS / Astal (TypeScript widgets)
+
+# ── Wallpaper & Colors ────────────────────────────────────────────────────────
+swww                  # Animated wallpaper daemon
+matugen-bin           # [AUR] Dynamic wallpaper-based color generation
+
+# ── Media Controls ────────────────────────────────────────────────────────────
+pipewire              # Audio server
+wireplumber           # PipeWire session manager
+playerctl             # MPRIS media player control
+brightnessctl         # Backlight control
+
+# ── Clipboard ─────────────────────────────────────────────────────────────────
+wl-clipboard          # wl-copy / wl-paste
+cliphist              # Clipboard history
+
+# ── Screenshots ───────────────────────────────────────────────────────────────
+grim                  # Wayland screenshot
+slurp                 # Region selector
+grimblast-git         # [AUR] Grimblast wrapper (copy area / screen)
+
+# ── System ────────────────────────────────────────────────────────────────────
+polkit-gnome          # PolicyKit authentication agent
+nautilus              # File manager (Finder replacement)
+bluez                 # Bluetooth stack
+bluez-utils           # bluetoothctl
+networkmanager        # nmcli / nmcli monitor
+upower                # Battery info (upower --monitor)
+socat                 # Unix socket bridge (Hyprland event bus)
+jq                    # JSON processor
+inotify-tools         # inotifywait (Downloads watcher)
+xdg-utils             # xdg-open
+xdg-user-dirs         # Standard user dirs
+
+# ── Terminals ─────────────────────────────────────────────────────────────────
+ghostty-git           # [AUR] Primary terminal (GPU-accelerated)
+kitty                 # Secondary terminal
+alacritty             # Tertiary terminal
+
+# ── GTK / Theming ─────────────────────────────────────────────────────────────
+whitesur-gtk-theme-git    # [AUR] WhiteSur GTK theme
+whitesur-icon-theme-git   # [AUR] WhiteSur icon set
+whitesur-cursor-theme-git # [AUR] WhiteSur cursors
+
+# ── Fonts ─────────────────────────────────────────────────────────────────────
+inter-font                # Inter UI font (system-wide)
+ttf-jetbrains-mono-nerd   # JetBrains Mono Nerd Font (terminals)
+ttf-nerd-fonts-symbols    # Symbols Nerd Font (icon glyphs in QML)
+
+# ── Qt Wayland ────────────────────────────────────────────────────────────────
+qt6-wayland           # Qt6 Wayland backend (required for Quickshell)
+qt5-wayland           # Qt5 Wayland backend
+
+# ── Notifications ─────────────────────────────────────────────────────────────
+libnotify             # notify-send (used by wallpaper.sh)

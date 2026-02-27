@@ -1,0 +1,285 @@
+// AquaOS — Widget Styles (power-menu, OSD, media player, calendar)
+
+@import "style";
+
+// ── Power Menu ────────────────────────────────────────────────────────────────
+
+.power-menu-scrim {
+    background: rgba(0, 0, 0, 0.65);
+}
+
+.power-menu-container {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 28px 24px;
+    min-width: 480px;
+
+    .power-menu-title {
+        font-family: Inter;
+        font-size: 18px;
+        font-weight: bold;
+        color: $fg;
+        margin-bottom: 20px;
+    }
+}
+
+.power-button {
+    background: rgba(255, 255, 255, 0.06);
+    border: 1px solid $border;
+    border-radius: 12px;
+    padding: 16px;
+    min-width: 76px;
+    min-height: 76px;
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.12);
+        border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    &.selected {
+        background: rgba(255, 255, 255, 0.16);
+        border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    &.confirm {
+        background: rgba(255, 69, 58, 0.25);
+        border-color: rgba(255, 69, 58, 0.55);
+    }
+}
+
+.power-icon-container {
+    border-radius: 50%;
+    min-width: 40px;
+    min-height: 40px;
+    padding: 8px;
+    margin-bottom: 6px;
+}
+
+.power-icon {
+    font-size: 20px;
+    color: white;
+}
+
+.power-label {
+    font-family: Inter;
+    font-size: 11px;
+    color: $fg;
+}
+
+// ── OSD ───────────────────────────────────────────────────────────────────────
+
+.osd-container {
+    background: $bg;
+    border-radius: 12px;
+    border: 1px solid $border;
+    padding: 12px 16px;
+    min-width: 240px;
+}
+
+.osd-icon {
+    font-family: "Symbols Nerd Font";
+    font-size: 18px;
+    color: $fg;
+    margin-right: 10px;
+}
+
+.osd-label {
+    font-family: Inter;
+    font-size: 13px;
+    color: $fg;
+    min-width: 40px;
+}
+
+.osd-bar {
+    min-height: 4px;
+    border-radius: 2px;
+    background: rgba(255, 255, 255, 0.12);
+
+    trough {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 2px;
+        min-height: 4px;
+    }
+
+    highlight {
+        background: $accent;
+        border-radius: 2px;
+    }
+
+    slider { min-width: 0; min-height: 0; background: transparent; }
+}
+
+.osd-percent {
+    font-family: Inter;
+    font-size: 12px;
+    color: $fg-dim;
+    min-width: 36px;
+}
+
+// ── Media Player ─────────────────────────────────────────────────────────────
+
+.media-player-container {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 16px;
+    min-width: 300px;
+}
+
+.album-art {
+    min-width: 64px;
+    min-height: 64px;
+    border-radius: $radius-sm;
+}
+
+.track-title {
+    font-family: Inter;
+    font-size: 14px;
+    font-weight: bold;
+    color: $fg;
+}
+
+.track-artist {
+    font-family: Inter;
+    font-size: 12px;
+    color: $fg-dim;
+    margin-top: 2px;
+}
+
+.track-album {
+    font-family: Inter;
+    font-size: 11px;
+    color: rgba(224, 224, 224, 0.40);
+    margin-top: 1px;
+}
+
+.time-label {
+    font-family: "JetBrains Mono Nerd Font";
+    font-size: 11px;
+    color: $fg-dim;
+    min-width: 36px;
+}
+
+.progress-bar {
+    trough {
+        background: rgba(255, 255, 255, 0.12);
+        border-radius: 2px;
+        min-height: 3px;
+    }
+    highlight {
+        background: $accent;
+        border-radius: 2px;
+    }
+    slider { min-width: 8px; min-height: 8px; background: white; border-radius: 50%; }
+}
+
+.media-btn {
+    background: transparent;
+    border: none;
+    border-radius: 50%;
+    padding: 6px;
+    color: $fg-dim;
+    font-size: 16px;
+
+    &:hover { background: rgba(255,255,255,0.10); color: $fg; }
+}
+
+.play-btn {
+    background: $accent;
+    border: none;
+    border-radius: 50%;
+    padding: 8px;
+    color: white;
+    font-size: 18px;
+    min-width: 36px;
+    min-height: 36px;
+
+    &:hover { background: rgba(10, 132, 255, 0.80); }
+}
+
+// ── Calendar ─────────────────────────────────────────────────────────────────
+
+.calendar-container {
+    background: $bg;
+    border-radius: $radius;
+    border: 1px solid $border;
+    padding: 16px;
+    min-width: 280px;
+}
+
+.calendar-header {
+    margin-bottom: 10px;
+}
+
+.month-label {
+    font-family: Inter;
+    font-size: 15px;
+    font-weight: bold;
+    color: $fg;
+}
+
+.nav-btn {
+    background: transparent;
+    border: none;
+    border-radius: $radius-sm;
+    padding: 4px 8px;
+    color: $fg-dim;
+    font-size: 16px;
+
+    &:hover { background: rgba(255,255,255,0.10); color: $fg; }
+}
+
+.day-header {
+    font-family: Inter;
+    font-size: 11px;
+    font-weight: bold;
+    color: $fg-dim;
+    text-align: center;
+    min-width: 32px;
+    min-height: 24px;
+}
+
+.day-cell {
+    font-family: Inter;
+    font-size: 12px;
+    color: $fg;
+    min-width: 32px;
+    min-height: 32px;
+    border-radius: 50%;
+    text-align: center;
+
+    &:hover { background: rgba(255,255,255,0.10); }
+
+    &.today {
+        background: $accent;
+        color: white;
+        font-weight: bold;
+    }
+
+    &.other-month { color: rgba(224, 224, 224, 0.28); }
+
+    &.current { font-weight: bold; }
+}
+
+.today-btn {
+    background: $accent-dim;
+    border: 1px solid rgba(10, 132, 255, 0.35);
+    border-radius: $radius-sm;
+    padding: 4px 14px;
+    color: $accent;
+    font-family: Inter;
+    font-size: 12px;
+    margin-top: 8px;
+
+    &:hover { background: rgba(10, 132, 255, 0.30); }
+}
+
+// ── Empty State ───────────────────────────────────────────────────────────────
+
+.empty-state {
+    font-family: Inter;
+    font-size: 13px;
+    color: $fg-dim;
+    padding: 24px;
+}
