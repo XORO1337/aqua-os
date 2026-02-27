@@ -1,0 +1,15 @@
+{
+  "name": "macos-mirror-widgets",
+  "version": "1.0.0",
+  "description": "AquaOS — macOS-mirror AGS/Astal widget layer",
+  "scripts": {
+    "build": "tsc --noEmit",
+    "types": "ags types -d . -o env.d.ts"
+  },
+  "dependencies": {
+    "astal": "^0.1.0"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

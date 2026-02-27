@@ -1,0 +1,119 @@
+/* AquaOS — Firefox userChrome.css
+ * Translucent, macOS-style browser UI.
+ * Enable in about:config: toolkit.legacyUserProfileCustomizations.stylesheets = true
+ */
+
+@namespace url("http://www.mozilla.org/keymaster/gatekeeper/there.is.only.xul");
+@namespace html url("http://www.w3.org/1999/xhtml");
+
+/* ── Titlebar: hide native controls ───────────────────────────────────────── */
+
+#titlebar {
+    -moz-appearance: none !important;
+}
+
+.titlebar-buttonbox-container,
+.titlebar-spacer[type="post-tabs"] {
+    display: none !important;
+}
+
+/* ── Navigator toolbox: translucent glass ─────────────────────────────────── */
+
+#navigator-toolbox {
+    background: rgba(30, 30, 32, 0.80) !important;
+    backdrop-filter: blur(20px) !important;
+    -webkit-backdrop-filter: blur(20px) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* ── Tab bar ─────────────────────────────────────────────────────────────── */
+
+#TabsToolbar {
+    background: transparent !important;
+    padding-top: 4px !important;
+}
+
+.tabbrowser-tab[selected] .tab-background {
+    background: rgba(10, 132, 255, 0.20) !important;
+    border-radius: 8px 8px 0 0 !important;
+    border: 1px solid rgba(10, 132, 255, 0.40) !important;
+    border-bottom: none !important;
+}
+
+.tabbrowser-tab:hover:not([selected]) .tab-background {
+    background: rgba(255, 255, 255, 0.08) !important;
+    border-radius: 8px 8px 0 0 !important;
+}
+
+.tab-label {
+    color: #e0e0e0 !important;
+    font-family: Inter, sans-serif !important;
+    font-size: 12px !important;
+}
+
+/* ── URL bar: Spotlight style ─────────────────────────────────────────────── */
+
+#urlbar {
+    background: rgba(255, 255, 255, 0.07) !important;
+    border: 1.5px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 10px !important;
+    color: #e0e0e0 !important;
+    padding: 2px 8px !important;
+    transition: border-color 150ms ease !important;
+}
+
+#urlbar[focused] {
+    background: rgba(10, 132, 255, 0.08) !important;
+    border-color: #0a84ff !important;
+    box-shadow: 0 0 0 3px rgba(10, 132, 255, 0.20) !important;
+}
+
+#urlbar-background {
+    background: transparent !important;
+    border: none !important;
+    box-shadow: none !important;
+}
+
+/* ── Sidebar ──────────────────────────────────────────────────────────────── */
+
+#sidebar-box {
+    background: rgba(26, 26, 30, 0.85) !important;
+    backdrop-filter: blur(20px) !important;
+    border-right: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* ── Find bar ─────────────────────────────────────────────────────────────── */
+
+#FindToolbar {
+    background: rgba(30, 30, 32, 0.88) !important;
+    backdrop-filter: blur(20px) !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.10) !important;
+}
+
+/* ── Bookmarks bar ────────────────────────────────────────────────────────── */
+
+#PersonalToolbar {
+    background: rgba(22, 22, 26, 0.75) !important;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.07) !important;
+}
+
+/* ── Menus ────────────────────────────────────────────────────────────────── */
+
+menupopup,
+.menupopup-arrowscrollbox {
+    background: rgba(28, 28, 32, 0.94) !important;
+    border: 1px solid rgba(255, 255, 255, 0.12) !important;
+    border-radius: 10px !important;
+    backdrop-filter: blur(20px) !important;
+    padding: 4px !important;
+}
+
+menuitem {
+    border-radius: 6px !important;
+    color: #e0e0e0 !important;
+}
+
+menuitem:hover {
+    background: rgba(10, 132, 255, 0.20) !important;
+    color: #ffffff !important;
+}
