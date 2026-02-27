@@ -42,7 +42,7 @@ backup: ## Backup current AquaOS configurations
 	@ts=$$(date +%Y%m%d_%H%M%S); \
 	bdir="$$HOME/.config/aqua-os-backup-$$ts"; \
 	mkdir -p "$$bdir"; \
-	for d in hypr quickshell ags ghostty kitty alacritty matugen; do \
+	for d in hypr quickshell ags ghostty kitty alacritty matugen firefox; do \
 		[ -d "$$HOME/.config/$$d" ] && cp -r "$$HOME/.config/$$d" "$$bdir/"; \
 	done; \
 	echo "Backup saved to $$bdir"

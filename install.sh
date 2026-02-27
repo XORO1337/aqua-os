@@ -260,7 +260,7 @@ backup_configs() {
     local backup_dir="${HOME}/.config/aqua-os-backup-$(date +%Y%m%d_%H%M%S)"
     mkdir -p "$backup_dir"
 
-    for dir in hypr quickshell ags ghostty kitty alacritty matugen; do
+    for dir in hypr quickshell ags ghostty kitty alacritty matugen firefox; do
         if [ -d "${HOME}/.config/${dir}" ]; then
             cp -r "${HOME}/.config/${dir}" "${backup_dir}/" || true
             log "Backed up ~/.config/${dir}"
@@ -305,7 +305,8 @@ EOF
 
     # Patch backlight interface in OSD.ts
     if [ -n "$BACKLIGHT_IFACE" ] && [ -f "${cfg}/ags/widgets/OSD.ts" ]; then
-        sed -i "s|/sys/class/backlight/[^/]*/brightness|/sys/class/backlight/${BACKLIGHT_IFACE}/brightness|g" \
+        escaped_iface=$(printf '%s\n' "$BACKLIGHT_IFACE" | sed 's/[&/\]/\\&/g')
+        sed -i "s|/sys/class/backlight/[^/]*/brightness|/sys/class/backlight/${escaped_iface}/brightness|g" \
             "${cfg}/ags/widgets/OSD.ts" || true
         log "Patched backlight path to: ${BACKLIGHT_IFACE}"
     fi
