@@ -45,4 +45,8 @@ export QT_WAYLAND_DISABLE_WINDOWDECORATION="${QT_WAYLAND_DISABLE_WINDOWDECORATIO
 export QT_AUTO_SCREEN_SCALE_FACTOR="${QT_AUTO_SCREEN_SCALE_FACTOR:-1}"
 
 # ── Launch Hyprland ───────────────────────────────────────────────────────────
-exec Hyprland "$@"
+if command -v start-hyprland &>/dev/null; then
+    exec start-hyprland "$@"
+else
+    exec Hyprland "$@"
+fi
