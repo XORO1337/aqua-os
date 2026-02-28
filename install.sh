@@ -394,6 +394,13 @@ EOF
         fi
     done
 
+    # Deploy Hyprland launcher script
+    if [ -f "${SCRIPT_DIR}/scripts/start-hyprland.sh" ]; then
+        cp "${SCRIPT_DIR}/scripts/start-hyprland.sh" "${bin_dir}/start-hyprland.sh"
+        chmod +x "${bin_dir}/start-hyprland.sh"
+        log "Deployed start-hyprland.sh to ${bin_dir}"
+    fi
+
     # Default wallpaper directory
     mkdir -p "${HOME}/Pictures/wallpapers"
 
@@ -488,6 +495,10 @@ print_summary() {
     echo "  - SF Pro fonts are Apple proprietary (Inter is used instead)"
     echo "  - Electron apps (Discord, VS Code) may not support transparency"
     echo "  - NVIDIA requires nvidia-drm.modeset=1 kernel parameter"
+    echo ""
+    warn "IMPORTANT: Never run 'sudo hyprland'. Always launch as your regular user."
+    echo "  Use: start-hyprland.sh  (from TTY)"
+    echo "  Or select Hyprland from your display manager"
     echo ""
     log "Enjoy AquaOS! 🍎"
 }

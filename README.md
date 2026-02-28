@@ -157,6 +157,7 @@ make restore    # Restores from the latest backup
 
 ## Known Limitations
 
+- **Never use `sudo hyprland`**: Hyprland must run as your regular user. Use `start-hyprland.sh` from a TTY, or select Hyprland from your display manager. Running as root destroys the user environment (`XDG_RUNTIME_DIR`, D-Bus session, etc.).
 - **Genie lamp animation**: Requires `wlr-animation-plugin` (experimental)
 - **SF Pro fonts**: Apple proprietary — **Inter** is used instead
 - **Electron apps** (Discord, VS Code, Obsidian): Transparency may not work

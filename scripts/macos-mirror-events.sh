@@ -79,10 +79,20 @@ emit_state() {
 # ── Hyprland socket listener ──────────────────────────────────────────────────
 
 listen_hyprland() {
-    local sock
-    sock="${HYPRLAND_INSTANCE_SIGNATURE:+/tmp/hypr/${HYPRLAND_INSTANCE_SIGNATURE}/.socket2.sock}"
-    [ -z "$sock" ] && return
-    [ -S "$sock" ] || return
+    local sock=""
+    local sig="${HYPRLAND_INSTANCE_SIGNATURE:-}"
+    [ -z "$sig" ] && return
+
+    # Modern Hyprland (≥ 0.40): socket in XDG_RUNTIME_DIR
+    local runtime_dir="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}"
+    if [ -S "${runtime_dir}/hypr/${sig}/.socket2.sock" ]; then
+        sock="${runtime_dir}/hypr/${sig}/.socket2.sock"
+    # Legacy Hyprland: socket in /tmp
+    elif [ -S "/tmp/hypr/${sig}/.socket2.sock" ]; then
+        sock="/tmp/hypr/${sig}/.socket2.sock"
+    else
+        return
+    fi
 
     socat -u "UNIX-CONNECT:$sock" - 2>/dev/null | while IFS= read -r line; do
         local event data
