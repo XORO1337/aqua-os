@@ -4,6 +4,24 @@
 
 set -uo pipefail
 
+# ── Log file setup ─────────────────────────────────────────────────────────────
+
+LOG_FILE="${TMPDIR:-/tmp}/aquaos-install-$(date +%Y%m%d-%H%M%S).log"
+INSTALL_START=$(date +%s)
+touch "$LOG_FILE" && chmod 600 "$LOG_FILE"
+
+{
+    printf '=%.0s' {1..60}; printf '\n'
+    printf 'AquaOS Installation Log\n'
+    printf 'Started   : %s\n' "$(date '+%Y-%m-%d %H:%M:%S')"
+    printf 'Git commit: %s\n' "$(git -C "$(dirname "${BASH_SOURCE[0]}")" rev-parse --short HEAD 2>/dev/null || printf 'n/a')"
+    printf 'Kernel    : %s\n' "$(uname -r)"
+    printf 'OS        : %s\n' "$(grep -m1 PRETTY_NAME /etc/os-release 2>/dev/null | cut -d= -f2- | tr -d '"' || uname -o)"
+    printf '=%.0s' {1..60}; printf '\n\n'
+} >> "$LOG_FILE"
+
+exec > >(tee -a "$LOG_FILE") 2>&1
+
 # ── Color codes ───────────────────────────────────────────────────────────────
 
 RED='\033[0;31m';  GREEN='\033[0;32m'; YELLOW='\033[1;33m'
@@ -11,13 +29,21 @@ BLUE='\033[0;34m'; BOLD='\033[1m';     RESET='\033[0m'
 
 # ── Logging ───────────────────────────────────────────────────────────────────
 
-log()     { echo -e "${GREEN}[✓]${RESET} $*"; }
-warn()    { echo -e "${YELLOW}[!]${RESET} $*"; }
-error()   { echo -e "${RED}[✗]${RESET} $*" >&2; }
-info()    { echo -e "${BLUE}[i]${RESET} $*"; }
+_log_to_file() {
+    local level="$1"; shift
+    local msg
+    msg=$(printf '%s' "$*" | sed 's/\x1b\[[0-9;]*[mGKHFf]//g')
+    printf '[%s] [%-4s] %s\n' "$(date '+%Y-%m-%d %H:%M:%S')" "$level" "$msg" >> "$LOG_FILE"
+}
+
+log()     { echo -e "${GREEN}[✓]${RESET} $*"; _log_to_file "OK  " "$*"; }
+warn()    { echo -e "${YELLOW}[!]${RESET} $*"; _log_to_file "WARN" "$*"; }
+error()   { echo -e "${RED}[✗]${RESET} $*" >&2; _log_to_file "ERR " "$*"; }
+info()    { echo -e "${BLUE}[i]${RESET} $*"; _log_to_file "INFO" "$*"; }
 section() { echo -e "\n${BOLD}══════════════════════════════════════════${RESET}"; \
             echo -e "${BOLD}  $*${RESET}"; \
-            echo -e "${BOLD}══════════════════════════════════════════${RESET}"; }
+            echo -e "${BOLD}══════════════════════════════════════════${RESET}"; \
+            _log_to_file "----" "=== $* ==="; }
 
 confirm() {
     local prompt="${1:-Continue?}"
@@ -27,6 +53,25 @@ confirm() {
         *)    return 0 ;;
     esac
 }
+
+# ── Exit trap ─────────────────────────────────────────────────────────────────
+
+_on_exit() {
+    local exit_code=$?
+    local elapsed=$(( $(date +%s) - ${INSTALL_START:-$(date +%s)} ))
+    local minutes=$(( elapsed / 60 ))
+    local seconds=$(( elapsed % 60 ))
+    local status_msg
+    if [ "$exit_code" -eq 0 ]; then
+        status_msg="succeeded"
+    else
+        status_msg="FAILED (exit code: ${exit_code})"
+    fi
+    echo ""
+    info "Install ${status_msg} in ${minutes}m ${seconds}s."
+    info "Install log: ${LOG_FILE}"
+}
+trap _on_exit EXIT INT TERM
 
 # ── Detect distribution ───────────────────────────────────────────────────────
 
@@ -449,6 +494,8 @@ main() {
   macOS-Mirror Linux Desktop Environment
 BANNER
     echo -e "${RESET}"
+
+    info "Install log: ${LOG_FILE}"
 
     detect_distro
     detect_hardware
