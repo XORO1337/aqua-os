@@ -183,7 +183,17 @@ install_packages() {
                 (cd /tmp/yay-bin && makepkg -si --noconfirm) || true
             fi
             sudo pacman -Syu --needed --noconfirm "${ARCH_PACKAGES[@]}" || true
-            yay -S --needed --noconfirm "${ARCH_AUR_PACKAGES[@]}" || true
+            yay -S --needed --noconfirm --overwrite '/usr/share/terminfo/*' "${ARCH_AUR_PACKAGES[@]}" || true
+            local _failed=()
+            for _pkg in ghostty-git quickshell-git aylurs-gtk-shell-git; do
+                if ! pacman -Qi "$_pkg" &>/dev/null; then
+                    _failed+=("$_pkg")
+                fi
+            done
+            if (( ${#_failed[@]} > 0 )); then
+                warn "Some packages failed to install: ${_failed[*]}"
+                warn "Try: yay -S --overwrite '/usr/share/terminfo/*' ${_failed[*]}"
+            fi
             ;;
         fedora)
             sudo dnf install -y "${FEDORA_PACKAGES[@]}" || true
@@ -266,10 +276,11 @@ install_themes() {
     # GTK theme
     if [ ! -d "$THEME_DIR/WhiteSur-Dark" ]; then
         info "Cloning WhiteSur GTK theme..."
+        rm -rf /tmp/WhiteSur-gtk-theme
         git clone --depth=1 https://github.com/vinceliuice/WhiteSur-gtk-theme.git \
             /tmp/WhiteSur-gtk-theme || true
         (cd /tmp/WhiteSur-gtk-theme && bash install.sh -d "$THEME_DIR" \
-            --opacity normal --color Dark --theme default --icon apple || true)
+            --opacity normal --color Dark --theme default || true)
         log "WhiteSur GTK theme installed."
     else
         log "WhiteSur GTK theme already present."
@@ -278,6 +289,7 @@ install_themes() {
     # Icon theme
     if [ ! -d "$ICON_DIR/WhiteSur-dark" ]; then
         info "Cloning WhiteSur icon theme..."
+        rm -rf /tmp/WhiteSur-icon-theme
         git clone --depth=1 https://github.com/vinceliuice/WhiteSur-icon-theme.git \
             /tmp/WhiteSur-icon-theme || true
         (cd /tmp/WhiteSur-icon-theme && bash install.sh -d "$ICON_DIR" || true)
@@ -289,6 +301,7 @@ install_themes() {
     # Cursor theme
     if [ ! -d "$ICON_DIR/WhiteSur-cursors" ]; then
         info "Cloning WhiteSur cursor theme..."
+        rm -rf /tmp/WhiteSur-cursors
         git clone --depth=1 https://github.com/vinceliuice/WhiteSur-cursors.git \
             /tmp/WhiteSur-cursors || true
         (cd /tmp/WhiteSur-cursors && bash install.sh || true)
