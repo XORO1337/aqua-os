@@ -119,7 +119,7 @@ Item {
         switch (ev.event) {
             case "activewindow":
                 root.activeWindowTitle = ev.title  || ""
-                root.activeWindowClass = ev.class_ || ev["class"] || ""
+                root.activeWindowClass = ev["class"] || ""
                 break
 
             case "workspace":
@@ -129,7 +129,7 @@ Item {
             case "openwindow":
                 // Add newly opened class
                 var open = root.runningClasses
-                open[ev.class_ || ev["class"] || ""] = true
+                open[ev["class"] || ""] = true
                 root.runningClasses = open
                 break
 
